@@ -1,6 +1,8 @@
 # Mern Chat App
 **This is the mern application where i am trying to build the chat application using the mern for both web and for the mobile devices**
 
+## Technology used
+-React.js
 
 
 
