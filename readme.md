@@ -5,7 +5,7 @@
 - React.js
 - MongoDb
 - TailwindCss
-- 
+- Firebase Google Auth
 
 
 
