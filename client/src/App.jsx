@@ -6,12 +6,16 @@ import Home from './Pages/Home/Home'
 import MainLayout from './components/MainLayout'
 import {createBrowserRouter,createRoutesFromElements,Route, RouterProvider} from 'react-router-dom'
 import Login from './Pages/Home/Login/Login'
+import Test from './Pages/Home/Test/Test'
+import Dashboard from './Pages/Dashboard/Dashboard'
 
 function App() {
   const router=createBrowserRouter(createRoutesFromElements(
     <Route path='/' element={<MainLayout/>}>
       <Route path='' element={<Home/>}/>
       <Route path='login' element={<Login/>}/>
+      <Route path='test' element={<Test/>}/>
+      <Route path='dashboard' element={<Dashboard/>}/>
 
     </Route>
   ))

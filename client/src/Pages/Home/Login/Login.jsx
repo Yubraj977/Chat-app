@@ -36,9 +36,9 @@ function Login() {
             <h1 className='font-bold font-inter text-2xl'>Welcome</h1>
             <p className='font-bold text-sm'>Signin With these options</p>
 
-            <div className=' bg-neutral-900 flex py-2 px-8 mt-4  rounded-md gap-2 items-center justify-center'>
+            <div className=' bg-neutral-900 flex py-2 px-8 mt-4  rounded-md gap-2 items-center justify-center' onClick={()=>{navigate('/dashboard')}}>
               <p><img src={google} alt="" className='h-4 w-4' /></p>
-              <p className='font-semibold  text-md'>Log in with Google</p>
+              <p className='font-semibold  text-md' >Log in with Google</p>
             </div>
 
             <div className=' bg-neutral-900 flex py-2 mt-4   rounded-md gap-2 items-center justify-center'>
