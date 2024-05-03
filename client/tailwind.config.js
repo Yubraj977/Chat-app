@@ -27,6 +27,34 @@ export default {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      const newUtilities = {
+        ".minimal-scrollbar::-webkit-scrollbar": {
+          width: "0px", // Width of the scrollbar
+          height: "0px", // Height of the scrollbar (only for horizontal scrollbar)
+        },
+        ".minimal-scrollbar::-webkit-scrollbar-thumb": {
+          display: "none", // Hide the scrollbar thumb
+        },
+        ".minimal-scrollbar::-webkit-scrollbar-track": {
+          display: "none", // Hide the scrollbar track
+        },
+        ".minimal-scrollbar": {
+          "-ms-overflow-style": "none", // IE scrollbar style
+          "scrollbar-width": "none", // Width of the scrollbar (for Firefox)
+          overflow: "auto" // Enable scrolling
+        },
+      };
+  
+      addUtilities(newUtilities);
+    },
+  ],
+  
+  
+  
+  
+  
+  
 }
 

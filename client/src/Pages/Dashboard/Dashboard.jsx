@@ -5,7 +5,7 @@ import Chat from './Middle-part/Chat'
 
 function Dashboard() {
     return (
-        <div className='w-full flex'>
+        <div className='w-full flex h-screen overflow-hidden '>
             <div className="left w-1/4">
                 <Left />
             </div>

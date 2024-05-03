@@ -1,6 +1,7 @@
 import React from 'react'
 import home from '/home.png'
 import Nav from '../../components/Nav'
+import Footer from '../../components/Footer'
 function Home() {
     return (
         <div className='lg:px-side px-2 bg-first text-white font-inter z-0 overflow-x-hidden lg:block flex flex-col items-center'>
@@ -37,6 +38,7 @@ function Home() {
             </div>
 
             <div className=''></div>
+        <Footer/>
         </div>
     )
 }

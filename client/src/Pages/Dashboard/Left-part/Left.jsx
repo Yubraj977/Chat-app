@@ -14,14 +14,23 @@ function Left() {
         { name: "gita" },
         { name: "sita" },
         { name: "rita" },
+        { name: "fita" },
+        { name: "fita" },
+        { name: "fita" },
+        { name: "fita" },
+        { name: "fita" },
+        { name: "fita" },
+        { name: "fita" },
+        { name: "fita" },
+        { name: "fita" },
         { name: "fita" }
     ]
     return (
 
-        <div className='w-full h-screen border flex flex-col bg-slate-900'>
+        <div className='w-full h-screen  flex flex-col bg-slate-900'>
             {/* The First Section */}
-            <div className='flex justify-between bg-slate-700 items-center px-2 py-2 rounded-md'>
-                <div className="image h-10 w-10 rounded-full border " >
+            <div className='flex justify-between bg-slate-700 items-center px-2 py-2 '>
+                <div className="image h-10 w-10 rounded-full  " >
                     <img src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFxQu84PuCD_zpL1Yv_Gr4C7lNzm2L9fR7CA&s'} alt="image" className=' h-full w-full object-cover rounded-full' />
                 </div>
                 <div className='flex text-xl gap-6'>
@@ -36,14 +45,14 @@ function Left() {
             {/* The Second Section */}
             <div className='  relative px-2 mt-2'>
                 <CiSearch className='absolute top-1/2 -translate-y-1/2 left-4' />
-                <input type="text" name="" id="" className='bg-slate-800 w-full border  px-8 py-1  rounded-lg ' />
+                <input type="text" name="" id="" className='bg-slate-800 w-full   px-8 py-1  rounded-lg ' />
             </div>
 
             {/* The third Section */}
-            <div className='mt-1'>
+            <div className='mt-1  overflow-y-scroll minimal-scrollbar '>
                 {arr.map((firend) => {
                     return (
-                        <div className='py-2 border-t-[0.1px]  border-opacity-15 border-white'>
+                        <div className='py-2 border-t-[0.1px]  border-opacity-15 border-white '>
 
                             <Friends />
                         </div>
