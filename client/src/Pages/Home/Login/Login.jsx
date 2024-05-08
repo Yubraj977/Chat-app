@@ -1,12 +1,61 @@
-import React from 'react'
+import React, { useState } from 'react'
 import login from '/login.png'
 import google from '/google.svg'
 import facebook from '/facebook.svg'
 import phone from '/phone.png'
 import { NavLink, Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+
+import app from '../../../connections/firebase'
+import { getAuth, signInWithPopup, GoogleAuthProvider, RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth'
+
+
 function Login() {
   const navigate = useNavigate()
+ 
+
+
+  async function handleGoogleSignIn() {
+    const provider = new GoogleAuthProvider();
+    const auth = getAuth()
+    const googleRes=await signInWithPopup(auth, provider)
+    const userData = {
+      username: googleRes.user.displayName,
+      email: googleRes.user.email,
+      image: googleRes.user.photoURL
+    };
+    console.log(userData);
+    const fetchRes=await fetch('http://localhost:4000/api/googlesignin',{
+      method:"POST",
+      'credentials':'include',
+      headers:{
+        'Content-Type':'application/json'
+      },
+    
+
+     body:JSON.stringify(userData)
+    })
+    const data=await fetchRes.json();
+    console.log(data);
+
+
+
+  }
+
+  async function handleFacebookSignIn(){
+    const fetchRes=await fetch('http://localhost:4000',{
+      method:"POST",
+      headers:{
+        'Content-Type':'application/json'
+      },
+      credentials:'include',
+    
+
+     body:JSON.stringify({name:"rakhes"})
+    })
+    const data=await fetchRes.json();
+    console.log(data);
+  }
   return (
     <div className='min-h-screen flex  text-inter overflow-x-hidden '>
 
@@ -36,12 +85,12 @@ function Login() {
             <h1 className='font-bold font-inter text-2xl'>Welcome</h1>
             <p className='font-bold text-sm'>Signin With these options</p>
 
-            <div className=' bg-neutral-900 flex py-2 px-8 mt-4  rounded-md gap-2 items-center justify-center' onClick={()=>{navigate('/dashboard')}}>
+            <div className=' bg-neutral-900 flex py-2 px-8 mt-4  rounded-md gap-2 items-center justify-center' onClick={handleGoogleSignIn} >
               <p><img src={google} alt="" className='h-4 w-4' /></p>
               <p className='font-semibold  text-md' >Log in with Google</p>
             </div>
 
-            <div className=' bg-neutral-900 flex py-2 mt-4   rounded-md gap-2 items-center justify-center'>
+            <div className=' bg-neutral-900 flex py-2 mt-4   rounded-md gap-2 items-center justify-center' onClick={handleFacebookSignIn}>
               <p><img src={facebook} alt="" className='h-4 w-4' /></p>
               <p className='font-semibold  text-md'>Log in with Facebook</p>
             </div>

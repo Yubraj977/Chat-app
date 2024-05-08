@@ -95,3 +95,4 @@ You can create tables using pipes `|` and hyphens `-`.
 ```
 
 This should give you a good start! Markdown is quite intuitive once you get the hang of it. Feel free to experiment and explore more advanced features as you become comfortable with the basics.
+
