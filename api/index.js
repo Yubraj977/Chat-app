@@ -6,10 +6,13 @@ const cookieParser = require('cookie-parser')
 const connectDb = require('./helper/dbconnect')
 const { Server } = require('socket.io');
 const checkAuth=require('./middlewares/checkauth')
-
+const {createUser}=require('./seeders/seed')
 // Importing Routes
 const userRoute=require('./routers/user.route')
 const authRoute=require('./routers/auth.route')
+const chatRoute=require('./routers/chat.route')
+
+
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -28,6 +31,7 @@ app.use(cookieParser())
 // Routes
 app.use('/api',authRoute)
 app.use('/api/user',checkAuth,userRoute)
+app.use('/api/chat',checkAuth,chatRoute)
 app.post('/', (req, res) => {
     console.log(req.cookies);
     res.cookie('hello','hi').json({message:"I am jsut working fine "});
@@ -60,5 +64,7 @@ io.on('connection', (socket) => {
 server.listen(4000, () => {
     console.log(`listening at 4000`);
     connectDb(process.env.MONGODB_URI)
+    // createUser(10)
+
 
 });

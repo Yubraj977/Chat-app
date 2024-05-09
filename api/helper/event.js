@@ -1,0 +1,3 @@
+const ALERT='ALERT'
+const REFECTH_CHATS='REFETCH_CHATS'
+module.exports={ALERT,REFECTH_CHATS}
