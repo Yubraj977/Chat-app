@@ -10,13 +10,14 @@ async function googlesignin(req, res, next) {
             next(errorHandler(404, "all fields are required"))
         }
         const existingUser = await user.findOne({ email });
+        console.log(existingUser);
         if (existingUser) {
             const token = jwt.sign({ id: existingUser._id, username: existingUser.username }, process.env.SECRET_KEY)
             res.cookie('access_token', token, {
                 secure: true, // Set to true if served over HTTPS
                 sameSite: 'None', // Required for cross-site requests
                 httpOnly: true // For security reasons, set httpOnly to true
-            }).status(200).json({ message: "Old user Welcome" });
+            }).status(200).json({ message: "Old user welcome" });
         }
         else {
             const newUser = new user({
@@ -25,7 +26,12 @@ async function googlesignin(req, res, next) {
                 image
             });
             await newUser.save();
-            res.json({ newUser })
+            const token = jwt.sign({ id: newUser._id, username: newUser.username }, process.env.SECRET_KEY)
+            res.cookie('access_token', token, {
+                secure: true, // Set to true if served over HTTPS
+                sameSite: 'None', // Required for cross-site requests
+                httpOnly: true // For security reasons, set httpOnly to true
+            }).status(200).json({ message: "Sign in sucess new user" });
         }
 
     } catch (error) {

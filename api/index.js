@@ -7,6 +7,8 @@ const connectDb = require('./helper/dbconnect')
 const { Server } = require('socket.io');
 const checkAuth=require('./middlewares/checkauth')
 const {createUser}=require('./seeders/seed')
+const multer  = require('multer')
+
 // Importing Routes
 const userRoute=require('./routers/user.route')
 const authRoute=require('./routers/auth.route')
@@ -28,10 +30,27 @@ app.use(cors({
 }));
 app.use(express.json())
 app.use(cookieParser())
+app.use(express.urlencoded({ extended: false }));
 // Routes
 app.use('/api',authRoute)
 app.use('/api/user',checkAuth,userRoute)
 app.use('/api/chat',checkAuth,chatRoute)
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './uploads')
+    },
+    filename: function (req, file, cb) {
+     
+      cb(null, file.originalname)
+    }
+  })
+  const upload = multer({ storage: storage })
+  
+app.post('/multer',upload.single('avatar'),(req,res)=>{
+   console.log(req.file);
+   res.send("i am ok")
+})
 app.post('/', (req, res) => {
     console.log(req.cookies);
     res.cookie('hello','hi').json({message:"I am jsut working fine "});
