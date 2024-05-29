@@ -1,8 +1,9 @@
 const errorHandler = require('../helper/error')
 const chat = require('../models/chat.model')
 const user = require('../models/user.model')
+const message=require('../models/message.model')
 const { emitEvent } = require('../helper/features')
-const { ALERT, REFECTH_CHATS } = require('../helper/event')
+const { ALERT, REFECTH_CHATS,NEW_MESSAGE_ALERT,NEW_ATTACHMENTS } = require('../helper/event')
 
 
 async function newGroupChat(req, res, next) {
@@ -196,17 +197,34 @@ async function sendAttachments(req, res, next) {
         if (!validChat) {
             return next(errorHandler(403, "the chat is not avilavle"))
         }
+        // console.log(req.files);
         const files=req.files || []
-        if(files.length<1){
-            return next(errorHandler(404,"please provide files"))
+        // if(files.length<1){
+        //     return next(errorHandler(404,"please provide files"))
 
-        }
+        // }
        // Upload Files Here
-       const attachments=[]
-       const messageForRealTime={};
-       const messageForDb={}
-
-
+       const attachments=["one","two","three","four","five"]
+       const messageForRealTime={
+        content:"",
+        attachments,
+        sender:{
+            id:me._id,
+            username:me.username
+        },
+        chat:chatId,
+       };
+       const messageForDb={content:'', attachments, sender:me,chat:chatId}
+       const myMessage=message.create(messageForDb)
+    emitEvent(req,NEW_ATTACHMENTS,validChat.members,{
+        message:messageForRealTime,
+        chatId
+    })
+    emitEvent(req,NEW_MESSAGE_ALERT,validChat.members,{chatId})
+    res.status(200).json({
+        sucess:true, 
+        message:myMessage
+    })
     } catch (error) {
         next(error)
     }

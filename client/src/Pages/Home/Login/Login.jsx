@@ -43,18 +43,19 @@ function Login() {
   }
 
   async function handleFacebookSignIn(){
-    const fetchRes=await fetch('http://localhost:4000',{
-      method:"POST",
-      headers:{
-        'Content-Type':'application/json'
-      },
-      credentials:'include',
+    // const fetchRes=await fetch('http://localhost:4000',{
+    //   method:"POST",
+    //   headers:{
+    //     'Content-Type':'application/json'
+    //   },
+    //   credentials:'include',
     
 
-     body:JSON.stringify({name:"rakhes"})
-    })
-    const data=await fetchRes.json();
-    console.log(data);
+    //  body:JSON.stringify({name:"rakhes"})
+    // })
+    // const data=await fetchRes.json();
+    // console.log(data);
+    navigate('/dashboard')
   }
   return (
     <div className='min-h-screen flex  text-inter overflow-x-hidden '>

@@ -8,7 +8,7 @@ const { Server } = require('socket.io');
 const checkAuth=require('./middlewares/checkauth')
 const {createUser}=require('./seeders/seed')
 const multer  = require('multer')
-
+const {attachmentsMulter}=require('./middlewares/multer')
 // Importing Routes
 const userRoute=require('./routers/user.route')
 const authRoute=require('./routers/auth.route')
@@ -47,7 +47,7 @@ const storage = multer.diskStorage({
   })
   const upload = multer({ storage: storage })
   
-app.post('/multer',upload.single('avatar'),(req,res)=>{
+app.post('/multer',attachmentsMulter,(req,res)=>{
    console.log(req.file);
    res.send("i am ok")
 })
